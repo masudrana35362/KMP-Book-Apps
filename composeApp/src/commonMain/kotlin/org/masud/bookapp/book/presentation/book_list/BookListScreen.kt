@@ -31,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import bookappwithkmp.composeapp.generated.resources.Res
 import bookappwithkmp.composeapp.generated.resources.favorites
@@ -102,7 +101,7 @@ fun BookListScreen(
                 keyboardController?.hide()
             },
             modifier = Modifier.fillMaxWidth().widthIn(max = 400.dp)
-                .padding(vertical = 16.dp, horizontal =10.dp)
+                .padding(vertical = 16.dp, horizontal = 10.dp)
 
         )
 

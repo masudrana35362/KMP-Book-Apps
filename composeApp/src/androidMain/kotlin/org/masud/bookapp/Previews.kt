@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import org.masud.bookapp.book.presentation.book_list.BookListScreen
 import org.masud.bookapp.book.presentation.book_list.BookListState
-import org.masud.bookapp.book.presentation.book_list.books
+
 
 
 @Preview
@@ -12,7 +12,7 @@ import org.masud.bookapp.book.presentation.book_list.books
 fun BookListScreenPreview() {
     BookListScreen(
         state = BookListState(
-            searchResults = books
+            searchResults = emptyList()
         ),
         onAction = {
 

@@ -1,11 +1,11 @@
 package org.masud.bookapp
 
-import androidx.compose.runtime.remember
 import androidx.compose.ui.window.ComposeUIViewController
-import io.ktor.client.engine.darwin.Darwin
+import org.masud.bookapp.app.App
+import org.masud.bookapp.core.di.initKoin
 
-fun MainViewController() = ComposeUIViewController { App(
-    engine = remember {
-        Darwin.create()
+fun MainViewController() = ComposeUIViewController(
+    configure = {
+        initKoin()
     }
-) }
+) { App() }
