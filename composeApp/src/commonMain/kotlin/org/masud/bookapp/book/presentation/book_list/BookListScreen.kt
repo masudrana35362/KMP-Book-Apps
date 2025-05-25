@@ -31,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import bookappwithkmp.composeapp.generated.resources.Res
 import bookappwithkmp.composeapp.generated.resources.favorites
@@ -48,7 +49,7 @@ import org.masud.bookapp.core.presentation.SandYellow
 
 @Composable
 fun BookListScreenRoot(
-    viewModel: BookListViewModel = koinViewModel(), onBookClick: (Book) -> Unit, modifier: Modifier = Modifier
+    viewModel: BookListViewModel = koinViewModel(), onBookClick: (Book) -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     BookListScreen(
@@ -88,14 +89,20 @@ fun BookListScreen(
 
 
     Column(
-        modifier = Modifier.fillMaxSize().background(DarkBlue).statusBarsPadding(), horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier
+            .fillMaxSize()
+            .background(DarkBlue)
+            .statusBarsPadding(),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         BookSearchBar(
             searchQuery = state.searchQuery, onSearchQueryChange = {
                 onAction(BookListAction.OnSearchQueryChange(it))
             }, onImeSearch = {
                 keyboardController?.hide()
-            }, modifier = Modifier.widthIn(max = 400.dp).fillMaxWidth().padding(16.dp)
+            },
+            modifier = Modifier.fillMaxWidth().widthIn(max = 400.dp)
+                .padding(vertical = 16.dp, horizontal =10.dp)
 
         )
 

@@ -45,64 +45,63 @@ fun BookSearchBar(
             backgroundColor = SandYellow
         )
     ){
+        OutlinedTextField(
+            value = searchQuery,
+            onValueChange = onSearchQueryChange,
+            shape = RoundedCornerShape(100),
+            colors = OutlinedTextFieldDefaults.colors(
+                cursorColor = DarkBlue,
+                focusedTextColor = DarkBlue,
+            ),
+            placeholder = {
+                Text(
+                    text = stringResource(Res.string.search_hint)
+                )
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.66f)
+                )
+            },
 
+            singleLine = true,
+            keyboardActions = KeyboardActions(
+                onSearch = {
+                    onImeSearch()
+                }
+            ),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Search
+            ),
+            trailingIcon = {
+                AnimatedVisibility(
+                    visible = searchQuery.isNotBlank()
+                ) {
+                    IconButton(
+                        onClick = {
+                            onSearchQueryChange("")
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = stringResource(Res.string.close_hint),
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+                }
+            },
+            modifier = modifier
+                .background(
+                    shape = RoundedCornerShape(100.dp),
+                    color = DesertWhite
+                )
+                .minimumInteractiveComponentSize()
+
+        )
     }
 
-    OutlinedTextField(
-        value = searchQuery,
-        onValueChange = onSearchQueryChange,
-        shape = RoundedCornerShape(100),
-        colors = OutlinedTextFieldDefaults.colors(
-            cursorColor = DarkBlue,
-            focusedTextColor = DarkBlue,
-        ),
-        placeholder = {
-            Text(
-                text = stringResource(Res.string.search_hint)
-            )
-        },
-        leadingIcon = {
-            Icon(
-                imageVector = Icons.Default.Search,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.66f)
-            )
-        },
-
-        singleLine = true,
-        keyboardActions = KeyboardActions(
-            onSearch = {
-                onImeSearch()
-            }
-        ),
-        keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.Text,
-            imeAction = ImeAction.Search
-        ),
-        trailingIcon = {
-            AnimatedVisibility(
-                visible = searchQuery.isNotBlank()
-            ) {
-                IconButton(
-                    onClick = {
-                        onSearchQueryChange("")
-                    }
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = stringResource(Res.string.close_hint),
-                        tint = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-            }
-        },
-        modifier = modifier
-            .background(
-                shape = RoundedCornerShape(100.dp),
-                color = DesertWhite
-            )
-            .minimumInteractiveComponentSize()
-
-    )
 }
 
