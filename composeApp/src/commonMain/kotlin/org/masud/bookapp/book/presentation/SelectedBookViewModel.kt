@@ -10,7 +10,6 @@ class SelectedBookViewModel : ViewModel() {
     private val _selectedBook = MutableStateFlow<Book?>(null)
     val selectedBook = _selectedBook.asStateFlow()
 
-
     fun onSelectBook(book: Book?) {
         _selectedBook.value = book
     }
