@@ -18,7 +18,7 @@ kotlin {
             jvmTarget.set(JvmTarget.JVM_11)
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -36,7 +36,7 @@ kotlin {
 
 
     sourceSets {
-        
+
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
@@ -61,13 +61,9 @@ kotlin {
             implementation(libs.androidx.room.runtime)
             implementation(libs.sqlite.bundled)
             api(libs.koin.core)
-
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.coil)
-
             implementation("org.jetbrains.compose.material:material-icons-extended:1.7.3")
-
-
 
         }
         commonTest.dependencies {
@@ -77,6 +73,11 @@ kotlin {
         dependencies {
             ksp(libs.androidx.room.compiler)
         }
+
+        nativeMain.dependencies {
+            implementation(libs.ktor.client.darwin)
+        }
+        
     }
 }
 
