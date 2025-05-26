@@ -79,7 +79,7 @@ The project is organized into the following main modules:
 
 **Android:**
 
-1.  Clone the repository: `git clone https://your-repository-url.git`
+1.  Clone the repository: `git clone https://github.com/masudrana35362/KMP-Book-Apps`
 2.  Open the project in Android Studio.
 3.  Let Gradle sync the project.
 4.  Select the `composeApp` run configuration.
@@ -101,9 +101,8 @@ The project is organized into the following main modules:
 *(This section is highly recommended. Add screenshots of your app's main screens here. You can embed images directly in Markdown).*
 
 Example:
-
 **Book List Screen**
-![Book List Screenshot](path/to/your/screenshot1.png)
+![Book List Screenshot](https://postimg.cc/PCPXt7h9)
 
 **Book Detail Screen**
 ![Book Detail Screenshot](path/to/your/screenshot2.png)
