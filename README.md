@@ -102,7 +102,7 @@ The project is organized into the following main modules:
 
 Example:
 **Book List Screen**
-![Book List Screenshot](https://postimg.cc/PCPXt7h9)
+![Book List Screenshot](https://i.postimg.cc/vmq73xKZ/Screenshot-20250526-161632.png)
 
 **Book Detail Screen**
 ![Book Detail Screenshot](path/to/your/screenshot2.png)
