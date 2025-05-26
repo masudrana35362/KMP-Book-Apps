@@ -3,6 +3,7 @@ package org.masud.bookapp.book.presentation.book_details
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 
 class BookDetailViewModel: ViewModel() {
 
@@ -13,6 +14,17 @@ class BookDetailViewModel: ViewModel() {
 
     fun onAction(action: BookDetailAction){
 
+        when(action){
+            is BookDetailAction.OnSelectedBookChange ->{
+                _state.update { it.copy(
+                    book = action.book
+                ) }
+            }
+            is BookDetailAction.OnFavoriteClick -> {
+
+            }
+            else -> Unit
+        }
     }
 
 }

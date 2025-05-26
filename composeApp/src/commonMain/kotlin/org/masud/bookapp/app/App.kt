@@ -1,14 +1,10 @@
 package org.masud.bookapp.app
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavBackStackEntry
@@ -20,13 +16,11 @@ import androidx.navigation.compose.rememberNavController
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import org.koin.compose.viewmodel.koinViewModel
 import org.masud.bookapp.book.presentation.SelectedBookViewModel
-import org.masud.bookapp.book.presentation.book_list.BookListScreenRoot
-import org.masud.bookapp.book.presentation.book_list.BookListViewModel
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.viewmodel.compose.viewModel
 import org.masud.bookapp.book.presentation.book_details.BookDetailAction
 import org.masud.bookapp.book.presentation.book_details.BookDetailScreenRoot
 import org.masud.bookapp.book.presentation.book_details.BookDetailViewModel
+import org.masud.bookapp.book.presentation.book_list.BookListScreenRoot
+import org.masud.bookapp.book.presentation.book_list.BookListViewModel
 
 @Composable
 @Preview
@@ -45,7 +39,7 @@ fun App() {
                     val viewModel = koinViewModel<BookListViewModel>()
                     val selectedBookViewModel = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
 
-                    LaunchedEffect (true){
+                    LaunchedEffect(true) {
                         selectedBookViewModel.onSelectBook(null)
                     }
 

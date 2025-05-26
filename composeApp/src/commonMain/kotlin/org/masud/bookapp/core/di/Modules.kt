@@ -10,6 +10,7 @@ import org.masud.bookapp.book.data.network.RemoteBookDataSource
 import org.masud.bookapp.book.data.repository.DefaultBookRepository
 import org.masud.bookapp.book.domain.BookRepository
 import org.masud.bookapp.book.presentation.SelectedBookViewModel
+import org.masud.bookapp.book.presentation.book_details.BookDetailViewModel
 import org.masud.bookapp.book.presentation.book_list.BookListViewModel
 import org.masud.bookapp.core.data.HttpClientFactory
 
@@ -24,4 +25,5 @@ val sharedModule = module {
 
     viewModelOf(::BookListViewModel)
     viewModelOf(::SelectedBookViewModel)
+    viewModelOf(::BookDetailViewModel)
 }
