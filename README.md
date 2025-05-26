@@ -105,7 +105,10 @@ Example:
 ![Book List Screenshot](https://i.postimg.cc/vmq73xKZ/Screenshot-20250526-161632.png)
 
 **Book Detail Screen**
-![Book Detail Screenshot](path/to/your/screenshot2.png)
+![Favorite Books Screen](https://i.postimg.cc/2yf1wzC5/Screenshot-20250526-161643.png)
+
+**Book Detail Screen**
+![Book Detail Screenshot](https://i.postimg.cc/5tdWjjgj/Screenshot-20250526-161655.png)
 
 ## Contributing
 
