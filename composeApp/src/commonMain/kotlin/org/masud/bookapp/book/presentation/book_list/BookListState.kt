@@ -5,7 +5,7 @@ import org.masud.bookapp.core.presentation.UiText
 
 
 data class BookListState(
-    val searchQuery: String = "kotlin",
+    val searchQuery: String = "harry potter",
     val searchResults: List<Book> = emptyList(),
     val favoriteBooks: List<Book> = emptyList(),
     val isLoading: Boolean = true,

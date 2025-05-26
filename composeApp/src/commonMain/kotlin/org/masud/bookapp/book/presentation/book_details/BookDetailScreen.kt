@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Star
@@ -88,11 +91,14 @@ private fun BookDetailScreen(
                     .verticalScroll(rememberScrollState()),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = state.book.title,
-                    style = MaterialTheme.typography.headlineSmall,
-                    textAlign = TextAlign.Center
-                )
+                SelectionContainer {
+
+                    Text(
+                        text = state.book.title,
+                        style = MaterialTheme.typography.headlineSmall,
+                        textAlign = TextAlign.Center
+                    )
+                }
                 Text(
                     text = state.book.authors.joinToString(),
                     style = MaterialTheme.typography.titleMedium,
@@ -185,20 +191,26 @@ private fun BookDetailScreen(
                     }*/
                     CircularProgressIndicator()
                 }else{
-                    Text(
-                        text = if (state.book.description.isNullOrBlank()) {
-                            stringResource(Res.string.description_unavailable)
-                        } else {
-                            state.book.description
-                        },
-                        style = MaterialTheme.typography.bodyMedium,
-                        textAlign = TextAlign.Justify,
-                        color = if (state.book.description.isNullOrBlank()) {
-                            Color.Black.copy(alpha = 0.4f)
-                        } else Color.Black,
-                        modifier = Modifier
-                            .padding(vertical = 8.dp)
-                    )
+
+                    SelectionContainer {
+                        Text(
+                            text = if (state.book.description.isNullOrBlank()) {
+                                stringResource(Res.string.description_unavailable)
+                            } else {
+                                state.book.description
+                            },
+                            style = MaterialTheme.typography.bodyMedium,
+                            textAlign = TextAlign.Justify,
+                            color = if (state.book.description.isNullOrBlank()) {
+                                Color.Black.copy(alpha = 0.4f)
+                            } else Color.Black,
+                            modifier = Modifier
+                                .padding(vertical = 8.dp)
+
+
+                        )
+                    }
+
                 }
 
 
