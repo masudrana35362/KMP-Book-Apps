@@ -6,7 +6,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -18,13 +19,14 @@ import org.masud.bookapp.core.domain.onSuccess
 class BookDetailViewModel(
     private val bookRepository: BookRepository,
     private val savedStateHandle: SavedStateHandle
-): ViewModel() {
+) : ViewModel() {
 
     private val bookId = savedStateHandle.toRoute<Route.BookDetails>().id
     private val _state = MutableStateFlow(BookDetailState())
-    val state  = _state
+    val state = _state
         .onStart {
             fetchBookDescription()
+            observeFavoriteStatus()
         }
         .stateIn(
             viewModelScope,
@@ -33,32 +35,59 @@ class BookDetailViewModel(
         )
 
 
-    fun onAction(action: BookDetailAction){
+    fun onAction(action: BookDetailAction) {
 
-        when(action){
-            is BookDetailAction.OnSelectedBookChange ->{
-                _state.update { it.copy(
-                    book = action.book
-                ) }
+        when (action) {
+            is BookDetailAction.OnSelectedBookChange -> {
+                _state.update {
+                    it.copy(
+                        book = action.book
+                    )
+                }
             }
+
             is BookDetailAction.OnFavoriteClick -> {
-
+                viewModelScope.launch {
+                    if (state.value.isFavorite) {
+                        bookRepository.deleteFavoriteBook(bookId)
+                    } else {
+                        state.value.book?.let { book ->
+                            bookRepository.markAsFavorite(book)
+                        }
+                    }
+                }
             }
+
             else -> Unit
         }
     }
 
-    private fun fetchBookDescription(){
+    private fun observeFavoriteStatus() {
+        bookRepository
+            .isBookFavorite(bookId)
+            .onEach { isFavorite ->
+                _state.update {
+                    it.copy(
+                        isFavorite = isFavorite
+                    )
+                }
+            }
+            .launchIn(viewModelScope)
+    }
+
+    private fun fetchBookDescription() {
         viewModelScope.launch {
             bookRepository
                 .getBookDescription(bookId)
                 .onSuccess { description ->
-                    _state.update { it.copy(
-                        book = it.book?.copy(
-                            description = description
-                        ),
-                        isLoading = false
-                    ) }
+                    _state.update {
+                        it.copy(
+                            book = it.book?.copy(
+                                description = description
+                            ),
+                            isLoading = false
+                        )
+                    }
                 }
         }
     }

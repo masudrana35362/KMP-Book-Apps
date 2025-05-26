@@ -2,11 +2,9 @@ package org.masud.bookapp.book.presentation.book_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
@@ -28,13 +26,15 @@ class BookListViewModel(
 
     private var cachedBooks = emptyList<Book>()
     private var searchJob: Job? = null
+    private var observeFavoriteJob: Job? = null
 
     private val _state = MutableStateFlow(BookListState())
     val state = _state
         .onStart {
-            if(cachedBooks.isEmpty()){
+            if (cachedBooks.isEmpty()) {
                 observeSearchQuery()
             }
+            observeFavoriteBooks()
         }
         .stateIn(
             viewModelScope,
@@ -62,6 +62,25 @@ class BookListViewModel(
         }
     }
 
+
+    private fun observeFavoriteBooks() {
+
+        observeFavoriteJob?.cancel()
+
+        observeFavoriteJob = bookRepository
+            .getFavoriteBooks()
+            .onEach { favoriteBooks ->
+                _state.update {
+                    it.copy(
+                        favoriteBooks = favoriteBooks
+                    )
+                }
+
+            }
+            .launchIn(viewModelScope)
+    }
+
+
     private fun observeSearchQuery() {
         state
             .map { it.searchQuery }
@@ -80,7 +99,7 @@ class BookListViewModel(
 
                     query.length >= 2 -> {
                         searchJob?.cancel()
-                       searchJob =  searchBooks(query)
+                        searchJob = searchBooks(query)
                     }
                 }
             }
