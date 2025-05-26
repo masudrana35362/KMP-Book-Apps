@@ -131,8 +131,4 @@ Please make sure to update tests as appropriate.
 
 ## License
 
-*(Optional: Specify the license for your project. Common choices include MIT, Apache 2.0, GPL, etc.)*
-
-Example:
-
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details (if you have one).
